@@ -7,14 +7,15 @@ export function validAnagram(str1: string, str2: string): boolean {
   const string1Frequency: Record<string, number> = {};
 
   for (let char of str1) {
-    if (!isAlphabetic()) {
-      return false;
-    }
-    char = char.toLowerCase();
     string1Frequency[char] = (string1Frequency[char] ?? 0) + 1;
   }
 
-  const string2Frequency = {};
+  for (let char of str2) {
+    if (!string1Frequency[char]) {
+      return false;
+    }
+    string1Frequency[char]--;
+  }
 
   return true;
 }
