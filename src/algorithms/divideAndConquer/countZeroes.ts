@@ -1,39 +1,21 @@
-export function countZeroes(arr: number[]): number {
-  return findFirstZero(arr, 0, arr.length - 1);
-}
-
-function findFirstZero(arr: number[], start: number, end: number): number {
-  const subarrayLength = end - start + 1;
-  if (subarrayLength === 1) {
-    return arr[start] ? 0 : arr.length - start;
-  }
-  let mid = Math.floor(subarrayLength / 2);
-  if (arr[mid]) {
-    return findFirstZero(arr, mid + 1, end);
-  } else if (subarrayLength === 2) {
-    if (start) {
-      return findFirstZero(arr, start, start);
+function countZeroes(arr: number[]) {
+    let firstZero = findFirst(arr)
+    if (firstZero === -1) {
+        return 0;
     }
-    return findFirstZero(arr, end, end);
-  } else {
-    return findFirstZero(arr, start, mid);
-  }
+
+    return arr.length - firstZero
 }
 
-// export function countZeroes(arr: number[]): number {
-//   let i = Math.floor(arr.length / 2);
-//
-//   while (i > -1) {
-//     const nextValue = arr[i + 1];
-//     if (nextValue) {
-//       i++;
-//     } else {
-//       if (arr[i]) {
-//         return arr.length - i - 1;
-//       } else {
-//         i--;
-//       }
-//     }
-//   }
-//   return arr.length;
-// }
+function findFirst(arr: number[], low = 0, high = arr.length - 1) {
+    if (high >= low) {
+        let mid = low + Math.floor((high - low) / 2)
+        if ((mid === 0 || arr[mid - 1] === 1) && arr[mid] === 0) {
+            return mid;
+        } else if (arr[mid] === 1) {
+            return findFirst(arr, mid + 1, high)
+        }
+        return findFirst(arr, low, mid - 1)
+    }
+    return -1;
+}
