@@ -1,9 +1,13 @@
 type NDArray<T> = (T | NDArray<T>)[];
 
-export function flatten(arr: NDArray<any>): any[] {
-  const flat = [];
-  if (!Array.isArray(arr[arr.length - 1])) {
-    return arr.pop();
+export function flatten<T>(arr: NDArray<any>): any[] {
+  const out: T[] = [];
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      out.push(...flatten(item));
+    } else {
+      out.push(item);
+    }
   }
-  return [];
+  return out;
 }
