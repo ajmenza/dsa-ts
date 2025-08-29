@@ -1,5 +1,5 @@
-import {sortedFrequency} from "./algorithms/divideAndConquer/sortedFrequency.js";
-import {findFirstRotate} from "./algorithms/divideAndConquer/findRotatedIndex.js";
+import {sortedFrequency} from "./divideAndConquer/sortedFrequency.js";
+import {findFirstRotate} from "./divideAndConquer/findRotatedIndex.js";
 
 
 console.log(findFirstRotate([3, 4, 1, 2], 4));
